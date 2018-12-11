@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Ma Petite Liste</string>
+    <string name="hint_item">Item</string>
+    <string name="Default_quantity">1</string>
+    <string name="Deleted">Deleted</string>
+    <string name="Undo">Undo</string>
+    <string name="reset">Reset Selected items</string>
+    
+    <string-array name="allUnits">
+        <item> </item>
+        <item>mg</item>
+        <item>g</item>
+        <item>kg</item>
+        <item>ml</item>
+        <item>cl</item>
+        <item>l</item>
+    </string-array>
 </resources>
