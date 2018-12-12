@@ -1,13 +1,15 @@
 package fr.lovefood.cesar_malo.mapetiteliste;
 
+import android.util.Log;
+
 import fr.lovefood.cesar_malo.mapetiteliste.Item.Item;
 import fr.lovefood.cesar_malo.mapetiteliste.ToDoList.ToDoList;
 
 import java.util.ArrayList;
 
 public class InitData {
-    private ArrayList<Item> list;
-    private ArrayList<ToDoList> lists;
+    private ArrayList<Item> list = new ArrayList<Item>();
+    private ArrayList<ToDoList> lists = new ArrayList<ToDoList>();
     private static InitData Instance;
 
     public static InitData getInstance(){
@@ -26,13 +28,13 @@ public class InitData {
         addItem(new Item(5, 1, "sucre", 500, 5, true));
         addItem(new Item(6, 1, "essence de vanille", 10, 2, false));
 
-        addTDL(new ToDoList(1, "Ma deuxième liste", "01/02/2018"));
-        addItem(new Item(1, 1, "batman", 1, 1, false));
-        addItem(new Item(2, 1, "flash", 1, 1, false));
-        addItem(new Item(3, 1, "watchmen", 1, 1, false));
-        addItem(new Item(4, 1, "barbie", 1, 1, false));
-        addItem(new Item(5, 1, "rastarocket", 1, 1, true));
-        addItem(new Item(6, 1, "Maman j'ai raté l'avion !", 1, 1, false));
+        addTDL(new ToDoList(2, "Ma deuxième liste", "01/02/2018"));
+        addItem(new Item(1, 2, "batman", 1, 1, false));
+        addItem(new Item(2, 2, "flash", 1, 1, false));
+        addItem(new Item(3, 2, "watchmen", 1, 1, false));
+        addItem(new Item(4, 2, "barbie", 1, 1, false));
+        addItem(new Item(5, 2, "rastarocket", 1, 1, true));
+        addItem(new Item(6, 2, "Maman j'ai raté l'avion !", 1, 1, false));
     }  //private constructor.
 
     public void addItem(Item i){list.add(i);}

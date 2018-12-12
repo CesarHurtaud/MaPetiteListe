@@ -10,6 +10,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,11 @@ public class TDLAdapter extends ArrayAdapter<ToDoList> {
 
         ToDoList tdl = lists.get(position);
 
+        TextView nameTDL_tv = (TextView) v.findViewById(R.id.name_tdl_lv);
+        nameTDL_tv.setText(tdl.getName());
+
+        TextView dateTDL_tv = (TextView) v.findViewById(R.id.date_tdl_lv);
+        dateTDL_tv.setText(tdl.getDate());
 
         return v;
 

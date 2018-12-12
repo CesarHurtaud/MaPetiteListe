@@ -2,7 +2,7 @@ package fr.lovefood.cesar_malo.mapetiteliste.Item;
 
 public class Item {
     private int id_item;
-    private int id_list; //foreign key to the list
+    private int list; //foreign key to the list
     private String description;
     private int quantity;
     private int unit; // indicate if the quantity is in ml, cl, l, mg, cg, g, none... -> Correspond au positionnement de la string-array
@@ -11,9 +11,9 @@ public class Item {
 
     public Item(){}
 
-    public Item(int id_item, int id_list, String description, int quantity, int unit, boolean checked) {
+    public Item(int id_item, int list, String description, int quantity, int unit, boolean checked) {
         this.id_item = id_item;
-        this.id_list = id_list;
+        this.list = list;
         this.description = description;
         this.quantity = quantity;
         this.unit = unit;
@@ -28,12 +28,12 @@ public class Item {
 
     public void setId_item(int id_item) {this.id_item = id_item;}
 
-    public int getId_list() {
-        return id_list;
+    public int getList() {
+        return list;
     }
 
-    public void setId_list(int id_list) {
-        this.id_list = id_list;
+    public void setList(int list) {
+        this.list = list;
     }
 
     public String getDescription() {
@@ -68,7 +68,7 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "id_item=" + id_item +
-                ", id_list=" + id_list +
+                ", list=" + list +
                 ", description='" + description + '\'' +
                 ", quantity=" + quantity +
                 ", unit=" + unit +

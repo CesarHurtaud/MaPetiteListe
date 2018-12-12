@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -58,7 +59,6 @@ public class TDLPersistance extends SQLiteOpenHelper {
         //2nd argument is String containing nullColumnHack
         db.close(); // Closing database connection
     }
-
 
     public void initData() {
         InitData init = InitData.getInstance();
@@ -140,7 +140,7 @@ public class TDLPersistance extends SQLiteOpenHelper {
                 tdl.setName(cursor.getString(1));
                 tdl.setDate(cursor.getString(2));
 
-                Log.i("Adding : ", tdl.toString());
+                Log.i("persistance adding : ", tdl.toString());
                 lists.add(tdl);
             } while (cursor.moveToNext());
         }

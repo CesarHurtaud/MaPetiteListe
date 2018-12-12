@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Adapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,12 +22,15 @@ public class MenuListes extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_listes);
-        //Intent intent = new Intent (this, ListItems.class);
-        //startActivity(intent);
-/*
+        Intent intent = new Intent (this, ListItems.class);
+        startActivity(intent);
+
+        /*
         ListView list_lv = (ListView) findViewById(R.id.TDL_lv);
 
+        Toast.makeText(this, "initData() lance !", Toast.LENGTH_LONG).show();
         TDLPersistance tdlPersistance = new TDLPersistance(this);
+        tdlPersistance.initData();
         ArrayList<ToDoList> lists = tdlPersistance.getAllTDL();
 
         TDLAdapter tdlAdapter = new TDLAdapter(this, R.layout.todolists, lists);

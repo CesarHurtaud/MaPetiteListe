@@ -51,7 +51,7 @@ public class ItemPersistance extends SQLiteOpenHelper{
 
         public void addItem(Item i) {
             int id = i.getId_item();
-            int list = i.getId_list();
+            int list = i.getList();
             String desc = i.getDescription();
             int quantity = i.getQuantity();
             int unit = i.getUnit();
@@ -91,7 +91,7 @@ public class ItemPersistance extends SQLiteOpenHelper{
 
 
         public void updateItem(Item i) {
-            int list = i.getId_list();
+            int list = i.getList();
             String desc = i.getDescription();
             int quantity = i.getQuantity();
             int unit = i.getUnit();
@@ -121,7 +121,7 @@ public class ItemPersistance extends SQLiteOpenHelper{
             if (cursor.getCount() != 0) {
                 cursor.moveToFirst();
                 item.setId_item(cursor.getInt(0));
-                item.setId_list(cursor.getInt(1));
+                item.setList(cursor.getInt(1));
                 item.setDescription(cursor.getString(2));
                 item.setQuantity(cursor.getInt(3));
                 item.setUnit(cursor.getInt(4));
@@ -160,13 +160,13 @@ public class ItemPersistance extends SQLiteOpenHelper{
                 do {
                     Item item = new Item();
                     item.setId_item(cursor.getInt(0));
-                    item.setId_list(cursor.getInt(1));
+                    item.setList(cursor.getInt(1));
                     item.setDescription(cursor.getString(2));
                     item.setQuantity(cursor.getInt(3));
                     item.setUnit(cursor.getInt(4));
                     item.setChecked((cursor.getInt(5) > 0));
 
-                    Log.i("getAllitems", item.toString());
+                    Log.i("getListItems ", item.toString());
                     items.add(item);
                 } while (cursor.moveToNext());
             }
@@ -186,7 +186,7 @@ public class ItemPersistance extends SQLiteOpenHelper{
                 do {
                     Item item = new Item();
                     item.setId_item(cursor.getInt(0));
-                    item.setId_list(cursor.getInt(1));
+                    item.setList(cursor.getInt(1));
                     item.setDescription(cursor.getString(2));
                     item.setQuantity(cursor.getInt(3));
                     item.setUnit(cursor.getInt(4));
@@ -196,7 +196,6 @@ public class ItemPersistance extends SQLiteOpenHelper{
                     items.add(item);
                 } while (cursor.moveToNext());
             }
-
             db.close();
             return items;
         }
