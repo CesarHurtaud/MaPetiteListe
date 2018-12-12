@@ -29,12 +29,12 @@ public class InitData {
         addItem(new Item(6, 1, "essence de vanille", 10, 2, false));
 
         addTDL(new ToDoList(2, "Ma deuxième liste", "01/02/2018"));
-        addItem(new Item(1, 2, "batman", 1, 1, false));
-        addItem(new Item(2, 2, "flash", 1, 1, false));
-        addItem(new Item(3, 2, "watchmen", 1, 1, false));
-        addItem(new Item(4, 2, "barbie", 1, 1, false));
-        addItem(new Item(5, 2, "rastarocket", 1, 1, true));
-        addItem(new Item(6, 2, "Maman j'ai raté l'avion !", 1, 1, false));
+        addItem(new Item(7, 2, "batman", 1, 0, false));
+        addItem(new Item(8, 2, "flash", 1, 0, false));
+        addItem(new Item(9, 2, "watchmen", 1, 0, false));
+        addItem(new Item(10, 2, "barbie", 1, 0, false));
+        addItem(new Item(11, 2, "rastarocket", 1, 0, true));
+        addItem(new Item(12, 2, "Maman j'ai raté l'avion !", 1, 0, false));
     }  //private constructor.
 
     public void addItem(Item i){list.add(i);}

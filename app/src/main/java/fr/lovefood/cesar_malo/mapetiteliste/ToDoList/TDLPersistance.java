@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 import fr.lovefood.cesar_malo.mapetiteliste.InitData;
@@ -65,6 +63,7 @@ public class TDLPersistance extends SQLiteOpenHelper {
         ArrayList<ToDoList> lists = init.getLists();
         for (ToDoList tdl : lists){
             addTDL(tdl);
+            Log.i("persistanceInit", tdl.toString());
         }
     }
 
@@ -95,11 +94,16 @@ public class TDLPersistance extends SQLiteOpenHelper {
     }
 
 
-    public ToDoList getTDL(String key) {
+    public ToDoList getTDL(int key) {
+        Log.i("TDLmeGave", "get");
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query(TABLE_TDL, null,//new String[]{"*"},
-                //Cursor cursor = db.query(TABLE_ITEMS, new String[]{ATTRIBUT_ID, ATTRIBUT_LIST, ATTRIBUT_DESCRIPTION, ATTRIBUT_QUANTITY, ATTRIBUT_UNIT, ATTRIBUT_CHECKED},
+        /*
+        Cursor cursor = db.query(TABLE_TDL, new String[]{ATTRIBUT_ID, ATTRIBUT_NAME, ATTRIBUT_DATE},
                 ATTRIBUT_ID + " = ?", new String[]{key}, null, null, null, null);
+                */
+        String query = "SELECT * FROM " + TABLE_TDL + " WHERE " + ATTRIBUT_ID + " = " + String.valueOf(key);
+        Cursor cursor = db.rawQuery(query, null);
+        Log.i("TDLmeGave", "cursor");
 
         ToDoList tdl = new ToDoList();
         if (cursor.getCount() != 0) {
@@ -127,11 +131,15 @@ public class TDLPersistance extends SQLiteOpenHelper {
 
 
     public ArrayList<ToDoList> getAllTDL() {
-        ArrayList<ToDoList> lists = new ArrayList<ToDoList>();
+        ArrayList<ToDoList> tdls = new ArrayList<ToDoList>();
 
+        Log.i("persistanceGetting", "1");
         String query = "SELECT * FROM " + TABLE_TDL + " ORDER BY " + ATTRIBUT_DATE + " DESC";
         SQLiteDatabase db = this.getWritableDatabase();
+
+        Log.i("persistanceGetting", query);
         Cursor cursor = db.rawQuery(query, null);
+        Log.i("persistanceGetting", "2");
 
         if(cursor.moveToFirst()) {
             do {
@@ -140,11 +148,11 @@ public class TDLPersistance extends SQLiteOpenHelper {
                 tdl.setName(cursor.getString(1));
                 tdl.setDate(cursor.getString(2));
 
-                Log.i("persistance adding : ", tdl.toString());
-                lists.add(tdl);
+                Log.i("persistanceGetting", tdl.toString());
+                tdls.add(tdl);
             } while (cursor.moveToNext());
         }
         db.close();
-        return lists;
+        return tdls;
     }
 }

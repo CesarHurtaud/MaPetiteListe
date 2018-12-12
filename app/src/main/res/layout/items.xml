@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/list_item_height"
     android:padding="10dp"
-    android:orientation="horizontal"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:weightSum="10">
 
     <TextView
         android:id="@+id/Item_text"
-        android:layout_width="367dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="10"
+        android:layout_weight="5"
         android:padding="5dp"
         android:text="@string/hint_item" />
 
     <TextView
         android:id="@+id/Item_quantity"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
@@ -27,13 +26,14 @@
 
     <Spinner
         android:id="@+id/Quantity_unit"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="3" />
 
     <CheckBox
         android:id="@+id/Selected_item"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
+
 </LinearLayout>
