@@ -37,11 +37,12 @@ public class TDLAdapter extends ArrayAdapter<ToDoList> {
         ToDoList tdl = lists.get(position);
 
         TextView nameTDL_tv = (TextView) v.findViewById(R.id.name_tdl_lv);
-        nameTDL_tv.setText(tdl.getName());
+        nameTDL_tv.setText(tdl.getName() + " - " + tdl.getDate());
 
+        /*
         TextView dateTDL_tv = (TextView) v.findViewById(R.id.date_tdl_lv);
         dateTDL_tv.setText(tdl.getDate());
-
+        */
         return v;
 
     }
