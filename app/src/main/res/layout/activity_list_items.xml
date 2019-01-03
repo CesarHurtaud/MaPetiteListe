@@ -13,35 +13,18 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="40dp"
             android:background="@color/design_default_color_primary_dark"
+            android:orientation="horizontal"
             android:weightSum="5">
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/moreItem"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
-                android:src="@android:drawable/btn_plus"
-                app:backgroundTint="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/tdl_name_lv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="209dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textColor="@color/colorAccent"
                 android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/resetSelected"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_height="wrap_content"
-                android:text="@string/reset"/>
 
         </LinearLayout>
 
@@ -59,6 +42,18 @@
         </ListView>
 
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addItemButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:clickable="true"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 
 

@@ -32,7 +32,7 @@ public class MenuListes extends AppCompatActivity {
             }
         });
 
-        DataBaseHelper dbh = new DataBaseHelper(this, null);
+        final DataBaseHelper dbh = new DataBaseHelper(this, null);
         dbh.initData();
         ArrayList<ToDoList> lists = dbh.getAllTDL();
 
@@ -47,5 +47,14 @@ public class MenuListes extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        list_lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                ToDoList tdl = (ToDoList) parent.getItemAtPosition(position);
+                dbh.delTDL(tdl);
+                return false;
+            }
+        });
+
     }
 }

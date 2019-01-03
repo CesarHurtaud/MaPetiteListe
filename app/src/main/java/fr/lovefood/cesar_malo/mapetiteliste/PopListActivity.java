@@ -47,6 +47,8 @@ public class PopListActivity extends Activity {
                 ToDoList tdl = new ToDoList(id, nom, formattedDate);
                 dataBaseHelper.addTDL(tdl);
 
+
+
                 finish();
             }
         });

@@ -25,6 +25,7 @@
             </meta-data>
         </activity>
         <activity android:name=".PopListActivity" android:theme="@style/AppTheme.popList"></activity>
+        <activity android:name=".PopItemActivity" android:theme="@style/AppTheme.popList"></activity>
     </application>
 
 </manifest>

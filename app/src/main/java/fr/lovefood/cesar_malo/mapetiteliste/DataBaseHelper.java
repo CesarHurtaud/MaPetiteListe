@@ -45,6 +45,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private final String get_number_of_id = "SELECT * FROM " + TABLE_TDL;
 
+    private final String get_item_highest_id = "SELECT *, MAX(" + ATTRIBUT_ITEM_ID + ") FROM " + TABLE_ITEMS;
+
     public DataBaseHelper(Context context, SQLiteDatabase.CursorFactory factory) {
         super(context,DATABASE_NAME, factory, DATABASE_VERSION);
     }
@@ -63,6 +65,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TDL);
         // Create tables again
         onCreate(db);
+    }
+
+    public void initData() {
+        InitData init = InitData.getInstance();
+
+        ArrayList<ToDoList> lists = init.getLists();
+        for (ToDoList tdl : lists){
+            addTDL(tdl);
+            Log.i("persistanceInit", tdl.toString());
+        }
+        ArrayList<Item> list = init.getItems();
+        for (Item item : list){
+            addItem(item);
+        }
     }
 
     public void addItem(Item i) {
@@ -88,19 +104,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    public void initData() {
-        InitData init = InitData.getInstance();
-
-        ArrayList<ToDoList> lists = init.getLists();
-        for (ToDoList tdl : lists){
-            addTDL(tdl);
-            Log.i("persistanceInit", tdl.toString());
-        }
-        ArrayList<Item> list = init.getItems();
-        for (Item item : list){
-            addItem(item);
-        }
-    }
 
     public void delItem(Item i) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -160,7 +163,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
          int resultat;
             String countQuery = "SELECT * FROM " + TABLE_itemS;
 
-            SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = this.getReadableDatabase();
             Cursor cursor = db.rawQuery(countQuery, null);
             resultat = cursor.getCount();
             db.close();
@@ -221,6 +224,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return items;
     }
 
+    public int getHighestItemId() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(get_item_highest_id, null);
+        c.moveToFirst();
+        int highestItemID = c.getInt(c.getColumnIndex(ATTRIBUT_ITEM_ID));
+        c.close();
+        int id_new_item = highestItemID + 1;
+
+        return id_new_item;
+    }
+
+    // faudra reprendre cette fonction pour l'adapter comme getHighestItemId
     public int getHighestTDLId() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(get_number_of_id, null);
