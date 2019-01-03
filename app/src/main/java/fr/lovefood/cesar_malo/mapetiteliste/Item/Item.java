@@ -6,12 +6,12 @@ public class Item {
     private String description;
     private int quantity;
     private int unit; // indicate if the quantity is in ml, cl, l, mg, cg, g, none... -> Correspond au positionnement de la string-array
-    private boolean checked; // If the article is already taken
+    private int checked; // If the article is already taken
 
 
     public Item(){}
 
-    public Item(int id_item, int list, String description, int quantity, int unit, boolean checked) {
+    public Item(int id_item, int list, String description, int quantity, int unit, int checked) {
         this.id_item = id_item;
         this.list = list;
         this.description = description;
@@ -56,12 +56,20 @@ public class Item {
 
     public void setUnit(int unit) {this.unit = unit;}
 
+    // provisoire
+    public int getChecked() {return checked;}
+
+    public void setCheckedProvisoire(int checked) {this.unit = checked;}
+
+
+    /*
     public boolean isChecked() {return checked;}
+
 
     public void setChecked(boolean checked) {
         this.checked = checked;
     }
-
+     */
     /*--------------------------------------------------------------------------------------------*/
 
     @Override

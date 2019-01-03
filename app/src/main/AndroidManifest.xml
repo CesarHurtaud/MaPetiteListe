@@ -16,7 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ListItems"></activity>
+        <activity android:name=".ListItems">
+            android:parentActivityName=".MenuListes">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuListes">
+            </meta-data>
+        </activity>
+        <activity android:name=".PopListActivity" android:theme="@style/AppTheme.popList"></activity>
     </application>
 
 </manifest>

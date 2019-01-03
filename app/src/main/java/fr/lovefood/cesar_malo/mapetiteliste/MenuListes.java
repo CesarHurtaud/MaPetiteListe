@@ -1,26 +1,20 @@
 package fr.lovefood.cesar_malo.mapetiteliste;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import fr.lovefood.cesar_malo.mapetiteliste.Item.Item;
-import fr.lovefood.cesar_malo.mapetiteliste.Item.ItemAdapter;
-import fr.lovefood.cesar_malo.mapetiteliste.Item.ItemPersistance;
 import fr.lovefood.cesar_malo.mapetiteliste.ToDoList.TDLAdapter;
-import fr.lovefood.cesar_malo.mapetiteliste.ToDoList.TDLPersistance;
 import fr.lovefood.cesar_malo.mapetiteliste.ToDoList.ToDoList;
 
 public class MenuListes extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +23,18 @@ public class MenuListes extends AppCompatActivity {
 
         ListView list_lv = (ListView) findViewById(R.id.TDL_lv);
 
-        TDLPersistance tdlPersistance = new TDLPersistance(this);
-        tdlPersistance.initData();
-        ArrayList<ToDoList> lists = tdlPersistance.getAllTDL();
+        FloatingActionButton addList = findViewById(R.id.addListButton);
+        addList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent popInt = new Intent(getApplicationContext(), PopListActivity.class);
+                startActivity(popInt);
+            }
+        });
+
+        DataBaseHelper dbh = new DataBaseHelper(this, null);
+        dbh.initData();
+        ArrayList<ToDoList> lists = dbh.getAllTDL();
 
         TDLAdapter tdlAdapter = new TDLAdapter(this, R.layout.todolists, lists);
         list_lv.setAdapter(tdlAdapter);

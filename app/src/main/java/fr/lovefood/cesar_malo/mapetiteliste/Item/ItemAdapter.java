@@ -51,8 +51,9 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         unit_tv.setSelection(item.getUnit());
 
 
-        CheckBox checkedItem = (CheckBox) v.findViewById(R.id.Selected_item);
-        checkedItem.setChecked(item.isChecked());
+        //en attente, cf problèmes sqlite
+        //CheckBox checkedItem = (CheckBox) v.findViewById(R.id.Selected_item);
+        //checkedItem.setChecked(item.isChecked());
 
         return v;
 
