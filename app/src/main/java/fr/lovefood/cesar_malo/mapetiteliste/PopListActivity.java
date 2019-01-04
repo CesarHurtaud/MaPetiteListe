@@ -48,7 +48,6 @@ public class PopListActivity extends Activity {
                 dataBaseHelper.addTDL(tdl);
 
 
-
                 finish();
             }
         });

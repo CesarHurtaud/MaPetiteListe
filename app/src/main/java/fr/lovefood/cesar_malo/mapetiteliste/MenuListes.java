@@ -15,6 +15,9 @@ import fr.lovefood.cesar_malo.mapetiteliste.ToDoList.ToDoList;
 
 public class MenuListes extends AppCompatActivity {
 
+    final DataBaseHelper dbh = new DataBaseHelper(this, null);
+    ArrayList<ToDoList> lists;
+    TDLAdapter tdlAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +35,11 @@ public class MenuListes extends AppCompatActivity {
             }
         });
 
-        final DataBaseHelper dbh = new DataBaseHelper(this, null);
-        dbh.initData();
-        ArrayList<ToDoList> lists = dbh.getAllTDL();
 
-        TDLAdapter tdlAdapter = new TDLAdapter(this, R.layout.todolists, lists);
+        dbh.initData();
+        lists = dbh.getAllTDL();
+
+        tdlAdapter = new TDLAdapter(this, R.layout.todolists, lists);
         list_lv.setAdapter(tdlAdapter);
 
         list_lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -52,9 +55,22 @@ public class MenuListes extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 ToDoList tdl = (ToDoList) parent.getItemAtPosition(position);
                 dbh.delTDL(tdl);
+                updateTDLView();
                 return false;
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateTDLView();
+    }
+
+    public void updateTDLView() {
+        lists.clear();
+        lists.addAll(dbh.getAllTDL());
+        tdlAdapter.notifyDataSetChanged();
     }
 }

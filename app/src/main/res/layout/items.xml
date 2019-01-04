@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_height"
     android:padding="10dp"
-    android:weightSum="10">
+    android:weightSum="10"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/Item_text"
