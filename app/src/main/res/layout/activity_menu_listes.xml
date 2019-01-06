@@ -15,6 +15,7 @@
             android:id="@+id/TDL_lv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:footerDividersEnabled="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -36,7 +36,7 @@ public class MenuListes extends AppCompatActivity {
         });
 
 
-        dbh.initData();
+
         lists = dbh.getAllTDL();
 
         tdlAdapter = new TDLAdapter(this, R.layout.todolists, lists);
