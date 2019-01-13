@@ -11,11 +11,13 @@
         android:id="@+id/popItemButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="120dp"
+        android:layout_marginEnd="80dp"
 
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="125dp"
+        android:backgroundTint="@color/colorPrimary"
         android:fontFamily="@font/amaranth"
         android:text="Ajouter un item"
+        android:textColor="@color/blanc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -23,12 +25,13 @@
         android:id="@+id/descriptionET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="120dp"
+        android:layout_marginEnd="100dp"
         android:layout_marginBottom="50dp"
         android:fontFamily="@font/amaranth"
         android:imeOptions="actionDone"
         android:singleLine="true"
         android:text="Description"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/quantityET"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -36,13 +39,14 @@
         android:id="@+id/quantityET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginBottom="49dp"
         android:fontFamily="@font/amaranth"
         android:imeOptions="actionDone"
         android:inputType="number"
         android:singleLine="true"
         android:text="Quantité"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toTopOf="@+id/popItemButton"
         app:layout_constraintEnd_toEndOf="parent" />
 

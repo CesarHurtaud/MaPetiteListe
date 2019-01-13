@@ -5,7 +5,8 @@
     android:layout_height="@dimen/list_item_height"
     android:padding="10dp"
     android:weightSum="10"
-    android:descendantFocusability="blocksDescendants">
+    android:descendantFocusability="blocksDescendants"
+    android:background="@drawable/border_items">
 
     <TextView
         android:id="@+id/Item_text"
@@ -13,6 +14,7 @@
         android:layout_height="59dp"
         android:layout_weight="5"
         android:fontFamily="@font/amaranth"
+        android:textColor="#ffffff"
         android:padding="5dp"
         android:text="@string/hint_item"
         android:textSize="16sp" />
@@ -22,23 +24,30 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="#ffffff"
         android:ems="10"
         android:fontFamily="@font/amaranth"
         android:maxLines="1"
         android:padding="5dp"
         android:text="@string/Default_quantity"
-        android:textAlignment="viewEnd" />
+        android:textAlignment="viewEnd"
+        />
+
+
 
     <Spinner
         android:id="@+id/Quantity_unit"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="3" />
+        android:layout_weight="3"
+        />
 
     <CheckBox
         android:id="@+id/Selected_item"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:textColor="@color/blanc"
+        android:buttonTint="@color/blanc"/>
 
 </LinearLayout>

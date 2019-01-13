@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListItems">
+    tools:context=".ListItems"
+    android:background="@color/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/design_default_color_primary_dark"
+            android:background="@color/background"
             android:orientation="horizontal"
             android:weightSum="5">
 
@@ -26,7 +27,7 @@
                 android:fontFamily="@font/amaranth"
                 android:gravity="center_vertical"
                 android:textAlignment="center"
-                android:textColor="@color/colorAccent"
+                android:textColor="#ffffff"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -34,7 +35,10 @@
 
         <ListView
             android:id="@+id/item_liste_lv"
-            android:layout_width="wrap_content"
+            android:paddingTop="2dp"
+            android:dividerHeight="2dp"
+            android:divider="@color/background"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
