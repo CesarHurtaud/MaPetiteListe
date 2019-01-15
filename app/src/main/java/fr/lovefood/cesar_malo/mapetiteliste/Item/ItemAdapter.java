@@ -2,9 +2,12 @@ package fr.lovefood.cesar_malo.mapetiteliste.Item;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.Spinner;
@@ -12,12 +15,16 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import fr.lovefood.cesar_malo.mapetiteliste.DataBaseHelper;
 import fr.lovefood.cesar_malo.mapetiteliste.R;
 
 public class ItemAdapter extends ArrayAdapter<Item> {
     ArrayList<Item> items;
     Context context;
     int ressource;
+
+    private boolean spinnerTouched = false;
+
 
     public ItemAdapter(Context context, int resource, ArrayList<Item> data) {
         super(context, resource, data);
@@ -28,10 +35,15 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         LayoutInflater inflater = ((Activity) context).getLayoutInflater();
         View v = inflater.inflate(ressource, parent, false);
 
-        Item item = items.get(position);
+
+        final DataBaseHelper dbh = new DataBaseHelper(context.getApplicationContext(), null);
+
+
+        final Item item = items.get(position);
         
         TextView item_tv = (TextView) v.findViewById(R.id.Item_text);
         item_tv.setText(item.getDescription());
@@ -48,6 +60,42 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         // Apply the adapter to the spinner
         unit_tv.setAdapter(adapterSpinner);
         unit_tv.setSelection(item.getUnit());
+
+
+
+        unit_tv.setOnTouchListener(new AdapterView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                spinnerTouched = true;
+                //Log.d("spinner", "touched");
+                return false;
+            }
+        });
+        unit_tv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //Log.d("spinner ", "selected : " + parent.getItemAtPosition(position).toString());
+                if (spinnerTouched == true) {
+                    Log.d("spinner ", "activated");
+                    dbh.updateItem(item, position);
+                    spinnerTouched = false;
+                }
+
+
+
+
+
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
 
         //en attente, cf problèmes sqlite

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,7 @@ public class ListItems extends AppCompatActivity {
             }
         });
 
+
         FloatingActionButton addItem = findViewById(R.id.addItemButton);
         addItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,14 +68,14 @@ public class ListItems extends AppCompatActivity {
                 startActivity(popIte);
             }
         });
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("test", "onResume activé !");
+        //Log.d("test", "onResume activé !");
         updateView();
+
 
     }
 

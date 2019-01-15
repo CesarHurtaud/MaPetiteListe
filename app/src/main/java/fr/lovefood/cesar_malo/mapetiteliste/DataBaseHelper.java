@@ -1,5 +1,6 @@
 package fr.lovefood.cesar_malo.mapetiteliste;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,6 +14,8 @@ import fr.lovefood.cesar_malo.mapetiteliste.Item.Item;
 import fr.lovefood.cesar_malo.mapetiteliste.ToDoList.ToDoList;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
+
+    private boolean dataInitialized = false;
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "mpl.db";
@@ -43,7 +46,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     ATTRIBUT_UNIT+ " INTEGER, " +
                     ATTRIBUT_CHECKED + " INTEGER " + ")";
 
-    private final String get_number_of_id = "SELECT * FROM " + TABLE_TDL;
+    private final String get_tdl_highest_id = "SELECT *, MAX(" + ATTRIBUT_LIST_ID + ") FROM " + TABLE_TDL;
 
     private final String get_item_highest_id = "SELECT *, MAX(" + ATTRIBUT_ITEM_ID + ") FROM " + TABLE_ITEMS;
 
@@ -51,6 +54,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         super(context,DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
+    @SuppressLint("LongLogTag")
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -58,7 +62,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(table_tdl_create);
         db.execSQL(table_item_create);
 
-        initData();
+
     }
 
     @Override
@@ -115,15 +119,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    /*
-    public void updateItem(Item i) {
+
+    public void updateItem(Item i, int u) {
+        Log.d("Spinner unit", Integer.valueOf(u).toString());
+        int id = i.getId_item();
         int list = i.getList();
         String desc = i.getDescription();
         int quantity = i.getQuantity();
-        int unit = i.getUnit();
-        boolean checked = i.isChecked();
+        int unit = u;
+        int checked = i.getChecked();
+
+        Log.d("spinner position", Integer.valueOf(unit).toString());
 
         ContentValues item = new ContentValues();
+        item.put(ATTRIBUT_ITEM_ID, id);
         item.put(ATTRIBUT_LIST, list);
         item.put(ATTRIBUT_DESCRIPTION, desc);
         item.put(ATTRIBUT_QUANTITY, quantity);
@@ -132,11 +141,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         // Updating Row
-        db.update(TABLE_ITEMS, item, ATTRIBUT_ITEM_ID + " = " + i.getId_item(), null);
+        db.update(TABLE_ITEMS, item, ATTRIBUT_ITEM_ID + " = " + id, null);
         db.close(); // Closing database connection
+
+        Log.d("items list 1", getListItems(1).toString());
     }
 
-
+/*
 
     public Item getItem(String key) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -160,19 +171,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
     */
 
-
-    /*
-       public int countItem() {
-         int resultat;
-            String countQuery = "SELECT * FROM " + TABLE_itemS;
-
-            SQLiteDatabase db = this.getReadableDatabase();
-            Cursor cursor = db.rawQuery(countQuery, null);
-            resultat = cursor.getCount();
-            db.close();
-            return resultat;
-        }
-        */
 
     public ArrayList<Item> getListItems(int id_list) {
         ArrayList<Item> items = new ArrayList<Item>();
@@ -241,14 +239,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // faudra reprendre cette fonction pour l'adapter comme getHighestItemId
     public int getHighestTDLId() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.rawQuery(get_number_of_id, null);
-        int numberOfIds = 0;
-        numberOfIds = c.getCount();
+        Cursor c = db.rawQuery(get_tdl_highest_id, null);
+        c.moveToFirst();
+        int highestID = c.getInt(c.getColumnIndex(ATTRIBUT_LIST_ID));
         c.close();
-        int highestID = numberOfIds + 1;
 
-
-        return highestID;
+        return highestID + 1 ;
     }
 
     public void addTDL(ToDoList t) {
@@ -275,6 +271,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String id = String.valueOf(t.getId_list());
         db.delete(TABLE_TDL, ATTRIBUT_LIST_ID + " = ?", new String[]{id});
+        db.delete(TABLE_ITEMS, ATTRIBUT_LIST + " = ?", new String[]{id});
         db.close();
     }
 

@@ -37,7 +37,9 @@ public class MenuListes extends AppCompatActivity {
             }
         });
 
-
+        if (dbh.getHighestTDLId() == 1) {
+            dbh.initData();
+        }
 
         lists = dbh.getAllTDL();
 
